@@ -1,6 +1,6 @@
 ﻿namespace ParallelFileCopy;
 
-public class ParallelFileCopyItem : IParallelFileCopyItem
+public class BasicParallelFileCopyItem : IParallelFileCopyItem
 {
     /// <summary>
     /// Invalid FileSize

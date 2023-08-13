@@ -20,9 +20,9 @@ namespace ParallelFileCopy.App
             //var cancellationTokenSource = new CancellationTokenSource();
 
             // Run
-            await new ParallelFileCopyService<ParallelFileCopyItem>().CopyFilesAsync(files.Zip(dst).Select(info =>
+            await new BasicParallelFileCopyService().CopyFilesAsync(files.Zip(dst).Select(info =>
             {
-                return new ParallelFileCopyItem()
+                return new BasicParallelFileCopyItem()
                 {
                     SrcFile = info.First,
                     DstFile = info.Second,
