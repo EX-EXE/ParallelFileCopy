@@ -4,10 +4,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EE094D7A-C299-4019-96A6-5EA9C8CA01A1}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParallelFileCopy", "src\ParallelFileCopy\ParallelFileCopy.csproj", "{EEAEA52F-7E2A-4F34-BDC5-BB481DFE2266}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelFileCopy.App", "src\ParallelFileCopy.App\ParallelFileCopy.App.csproj", "{71540381-663B-494F-B15C-E288DFBEBFF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParallelFileCopy.App", "src\ParallelFileCopy.App\ParallelFileCopy.App.csproj", "{71540381-663B-494F-B15C-E288DFBEBFF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F237FE9F-0548-4150-A869-6FCC7F73FBC1}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
