@@ -205,31 +205,20 @@ public class ParallelFileCopyService<TItem>
     /// <param name="cancellationToken"></param>
     protected virtual void RunFileCopy(TItem parallelCopyItem, Span<byte> cache, CancellationToken cancellationToken)
     {
-        using (var srcStream = new FileStream(
-            parallelCopyItem.SrcFile,
-            FileMode.Open,
-            FileAccess.Read,
-            FileShare.ReadWrite,
-            1,
-            false))
+        using var srcFileHandle = System.IO.File.OpenHandle(parallelCopyItem.SrcFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, FileOptions.RandomAccess | FileOptions.SequentialScan, 0);
+        using var dstFileHandle = System.IO.File.OpenHandle(parallelCopyItem.DstFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read, FileOptions.RandomAccess | FileOptions.SequentialScan, 0);
+        var srcLength = System.IO.RandomAccess.GetLength(srcFileHandle);
+#if NET7_0_OR_GREATER
+        System.IO.RandomAccess.SetLength(dstFileHandle, srcLength);
+#endif
+
+        parallelCopyItem.CopyedSize = 0;
+        while(parallelCopyItem.CopyedSize < srcLength)
         {
-            using (var dstStream = new FileStream(
-                parallelCopyItem.DstFile,
-                FileMode.OpenOrCreate,
-                FileAccess.ReadWrite,
-                FileShare.Read,
-                1,
-                false))
-            {
-                dstStream.SetLength(srcStream.Length);
-                while (srcStream.Position < srcStream.Length)
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-                    var readSize = srcStream.Read(cache);
-                    dstStream.Write(cache.Slice(0, readSize));
-                    parallelCopyItem.CopyedSize += readSize;
-                }
-            }
+            cancellationToken.ThrowIfCancellationRequested();
+            var readSize = System.IO.RandomAccess.Read(srcFileHandle, cache, parallelCopyItem.CopyedSize);
+            System.IO.RandomAccess.Write(dstFileHandle, cache.Slice(0,readSize), parallelCopyItem.CopyedSize);
+            parallelCopyItem.CopyedSize += readSize;
         }
     }
 
