@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9EFEA0AC-D53D-4F61-927C-39397ED6B6B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelFileCopy.Test", "test\ParallelFileCopy.Test\ParallelFileCopy.Test.csproj", "{5D3C0766-335C-4421-B78B-A323A8443096}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,10 @@ Global
 		{71540381-663B-494F-B15C-E288DFBEBFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71540381-663B-494F-B15C-E288DFBEBFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71540381-663B-494F-B15C-E288DFBEBFF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D3C0766-335C-4421-B78B-A323A8443096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D3C0766-335C-4421-B78B-A323A8443096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D3C0766-335C-4421-B78B-A323A8443096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D3C0766-335C-4421-B78B-A323A8443096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EEAEA52F-7E2A-4F34-BDC5-BB481DFE2266} = {EE094D7A-C299-4019-96A6-5EA9C8CA01A1}
 		{71540381-663B-494F-B15C-E288DFBEBFF7} = {EE094D7A-C299-4019-96A6-5EA9C8CA01A1}
+		{5D3C0766-335C-4421-B78B-A323A8443096} = {9EFEA0AC-D53D-4F61-927C-39397ED6B6B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56B5A068-34F3-4C94-AB52-E4999183E6F9}
