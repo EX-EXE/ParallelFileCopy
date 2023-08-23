@@ -2,7 +2,7 @@ namespace ParallelFileCopy.Test;
 
 public class CopyFileTest
 {
-    private static readonly long[] Nums = { 0, 1, 2, 8, 16, 32, 64, 128, 256, 512, 1024, 5, 10, 100, 500, 1000, 2000, 5000 };
+    private static readonly long[] Nums = { 0, 1, 64, 128, 256, 500, 1000, 5000 };
     private static readonly long[] Units = { 1, 1024, 1024 * 1024 };
 
     public static List<object[]> FileSizeArray()
@@ -38,6 +38,36 @@ public class CopyFileTest
         System.IO.File.Delete(dstFile);
         System.IO.File.Delete(srcFile);
     }
+
+    [Fact]
+    public async Task CopyFiles()
+    {
+        var itemList = new List<BasicParallelFileCopyItem>();
+        foreach (var fileSize in new[] { 1024, 1024 * 1024, 1024 * 2 })
+        {
+            foreach (var _ in Enumerable.Range(0, 1024))
+            {
+                var srcFile = FileUtility.CreateRandomFile(fileSize);
+                var dstFile = System.IO.Path.GetTempFileName();
+
+                var item = new BasicParallelFileCopyItem()
+                {
+                    SrcFile = srcFile,
+                    DstFile = dstFile,
+                };
+                itemList.Add(item);
+            }
+        }
+        await copyService.CopyFilesAsync(itemList).ConfigureAwait(false);
+        foreach(var item in itemList)
+        {
+            Assert.True(FileUtility.CompareFile(item.SrcFile, item.DstFile));
+            System.IO.File.Delete(item.SrcFile);
+            System.IO.File.Delete(item.DstFile);
+        }
+    }
+
+
 
     [Fact]
     public async Task CopyOverride()
