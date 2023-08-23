@@ -16,5 +16,5 @@ var copyService = new BasicParallelFileCopyService()
 {
     ParallelCount = 1,
 };
-await copyService.CopyFilesAsync(itemList).ConfigureAwait(false);
+await copyService.CopyFilesAsync(copyItems).ConfigureAwait(false);
 ```
